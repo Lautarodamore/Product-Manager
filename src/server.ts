@@ -7,7 +7,7 @@ process.on("uncaughtException", err => {
   process.exit(1);
 });
 
-const server: Server = app.listen(app.get("PORT"), () => {
+const server: Server = app.listen(app.get("PORT"), async () => {
   console.log(`Server is online on port ${app.get("PORT")}`);
 });
 
