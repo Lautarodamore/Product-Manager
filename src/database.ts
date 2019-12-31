@@ -1,4 +1,3 @@
-import { Pool } from "pg";
 import { Sequelize } from "sequelize";
 
 export const sequelize = new Sequelize(

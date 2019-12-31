@@ -1,32 +1,32 @@
-import TypeProduct from "../models/TypeProducts";
+import Provider from "../models/Providers";
 import { Response, Request, NextFunction } from "express";
 import { catchAsync } from "../utils/catchAsync";
 import AppError from "../utils/AppError";
 
-export const getAllTypeProduct = catchAsync(
+export const getProviders = catchAsync(
   async (req: Request, res: Response): Promise<Response> => {
-    const typeProducts = await TypeProduct.findAll();
+    const providers = await Provider.findAll();
 
     return res.status(200).json({
       status: "success",
-      data: typeProducts,
-      total: typeProducts.length
+      data: providers,
+      total: providers.length
     });
   }
 );
 
-export const createTypeProduct = catchAsync(
+export const createProvider = catchAsync(
   async (req: Request, res: Response): Promise<Response> => {
-    const typeProduct = await TypeProduct.create(req.body);
+    const provider = await Provider.create(req.body);
 
     return res.status(200).json({
       status: "success",
-      data: typeProduct
+      data: provider
     });
   }
 );
 
-export const getTypeProduct = catchAsync(
+export const getProvider = catchAsync(
   async (
     req: Request,
     res: Response,
@@ -34,33 +34,28 @@ export const getTypeProduct = catchAsync(
   ): Promise<Response> => {
     const { id } = req.params;
 
-    const typeProduct = await TypeProduct.findOne({
+    const provider = await Provider.findOne({
       where: {
         id
       }
     });
 
-    if (!typeProduct) {
-      next(
-        new AppError(
-          "El tipo de producto que esta buscando no se encuentra",
-          500
-        )
-      );
+    if (!provider) {
+      next(new AppError("El proveedor que esta buscando no se encuentra", 500));
     }
 
     return res.status(200).json({
       status: "success",
-      data: typeProduct
+      data: provider
     });
   }
 );
 
-export const deleteTypeProduct = catchAsync(
+export const deleteProvider = catchAsync(
   async (req: Request, res: Response): Promise<Response> => {
     const { id } = req.params;
 
-    await TypeProduct.destroy({
+    await Provider.destroy({
       where: {
         id
       }
@@ -68,12 +63,12 @@ export const deleteTypeProduct = catchAsync(
 
     return res.status(200).json({
       status: "success",
-      data: "El producto ha sido eliminado"
+      data: "El proveedor ha sido eliminado"
     });
   }
 );
 
-export const updateTypeProduct = catchAsync(
+export const updateProvider = catchAsync(
   async (
     req: Request,
     res: Response,
@@ -81,26 +76,21 @@ export const updateTypeProduct = catchAsync(
   ): Promise<Response> => {
     const { id } = req.params;
 
-    const typeProduct = await TypeProduct.findOne({
+    const provider = await Provider.findOne({
       where: {
         id
       }
     });
 
-    if (typeProduct) {
-      typeProduct.update(req.body);
+    if (provider) {
+      provider.update(req.body);
     } else {
-      next(
-        new AppError(
-          "El tipo de producto que esta buscando no se encuentra",
-          500
-        )
-      );
+      next(new AppError("El proveedor que esta buscando no se encuentra", 500));
     }
 
     return res.status(200).json({
       status: "success",
-      data: typeProduct
+      data: provider
     });
   }
 );

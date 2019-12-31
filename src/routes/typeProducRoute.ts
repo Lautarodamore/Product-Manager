@@ -1,7 +1,10 @@
 import { Router } from "express";
 import {
   getAllTypeProduct,
-  createTypeProduct
+  createTypeProduct,
+  getTypeProduct,
+  deleteTypeProduct,
+  updateTypeProduct
 } from "../controllers/typeProductController";
 
 const router: Router = Router();
@@ -11,13 +14,10 @@ router
   .get(getAllTypeProduct)
   .post(createTypeProduct);
 
-/*
-router.route('/:id').get(
-    //getController
-).patch(
-    //updateController
-).delete(
-    //deleteController
-)*/
+router
+  .route("/:id")
+  .get(getTypeProduct)
+  .delete(deleteTypeProduct)
+  .patch(updateTypeProduct);
 
 export default router;
