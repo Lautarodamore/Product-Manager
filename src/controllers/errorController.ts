@@ -7,6 +7,7 @@ const globalErrorHandler = (
   res: Response,
   next: NextFunction
 ): Response => {
+  console.log("hola error");
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
   err.message = err.message || "Ocurrio un error, intentelo mas tarde...";

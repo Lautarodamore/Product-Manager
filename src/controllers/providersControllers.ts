@@ -5,7 +5,9 @@ import AppError from "../utils/AppError";
 
 export const getProviders = catchAsync(
   async (req: Request, res: Response): Promise<Response> => {
-    const providers = await Provider.findAll();
+    const providers = await Provider.findAll({
+      attributes: ["id", "nombre", "email", "dni", "empresa", "created_at"]
+    });
 
     return res.status(200).json({
       status: "success",
@@ -37,7 +39,8 @@ export const getProvider = catchAsync(
     const provider = await Provider.findOne({
       where: {
         id
-      }
+      },
+      attributes: ["id", "nombre", "email", "dni", "empresa", "created_at"]
     });
 
     if (!provider) {
@@ -79,7 +82,8 @@ export const updateProvider = catchAsync(
     const provider = await Provider.findOne({
       where: {
         id
-      }
+      },
+      attributes: ["id", "nombre", "email", "dni", "empresa", "created_at"]
     });
 
     if (provider) {

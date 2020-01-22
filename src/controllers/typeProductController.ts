@@ -5,7 +5,9 @@ import AppError from "../utils/AppError";
 
 export const getAllTypeProduct = catchAsync(
   async (req: Request, res: Response): Promise<Response> => {
-    const typeProducts = await TypeProduct.findAll();
+    const typeProducts = await TypeProduct.findAll({
+      attributes: ["id", "descripcion"]
+    });
 
     return res.status(200).json({
       status: "success",
@@ -27,17 +29,14 @@ export const createTypeProduct = catchAsync(
 );
 
 export const getTypeProduct = catchAsync(
-  async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<Response> => {
+  async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
 
     const typeProduct = await TypeProduct.findOne({
       where: {
         id
-      }
+      },
+      attributes: ["id", "descripcion"]
     });
 
     if (!typeProduct) {
@@ -47,12 +46,12 @@ export const getTypeProduct = catchAsync(
           500
         )
       );
+    } else {
+      return res.status(200).json({
+        status: "success",
+        data: typeProduct
+      });
     }
-
-    return res.status(200).json({
-      status: "success",
-      data: typeProduct
-    });
   }
 );
 
@@ -68,27 +67,28 @@ export const deleteTypeProduct = catchAsync(
 
     return res.status(200).json({
       status: "success",
-      data: "El producto ha sido eliminado"
+      data: "El tipo de producto ha sido eliminado"
     });
   }
 );
 
 export const updateTypeProduct = catchAsync(
-  async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<Response> => {
+  async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
 
     const typeProduct = await TypeProduct.findOne({
       where: {
         id
-      }
+      },
+      attributes: ["id", "descripcion"]
     });
 
     if (typeProduct) {
       typeProduct.update(req.body);
+      return res.status(200).json({
+        status: "success",
+        data: typeProduct
+      });
     } else {
       next(
         new AppError(
@@ -97,10 +97,5 @@ export const updateTypeProduct = catchAsync(
         )
       );
     }
-
-    return res.status(200).json({
-      status: "success",
-      data: typeProduct
-    });
   }
 );

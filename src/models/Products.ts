@@ -4,11 +4,10 @@ import Provider from "./Providers";
 import TypeProduct from "./TypeProducts";
 
 interface IProduct extends Model {
-  readonly id: number;
+  readonly id?: number;
   tip_pro: number;
   descripcion?: string;
   precio: number;
-  proveedor: number;
   created_at?: Date;
 }
 
@@ -21,6 +20,7 @@ const Product = <ProducStatic>sequelize.define(
   {
     id: {
       type: Sequelize.INTEGER,
+      autoIncrement: true,
       primaryKey: true
     },
     tip_pro: {
@@ -31,9 +31,6 @@ const Product = <ProducStatic>sequelize.define(
     },
     precio: {
       type: Sequelize.FLOAT
-    },
-    proveedor: {
-      type: Sequelize.INTEGER
     },
     created_at: {
       type: Sequelize.DATE

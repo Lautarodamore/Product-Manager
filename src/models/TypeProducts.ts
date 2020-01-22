@@ -2,8 +2,8 @@ import Sequelize, { Model, BuildOptions } from "sequelize";
 import { sequelize } from "../database";
 
 interface ITypeProduct extends Model {
-  readonly id: number;
-  descripcion?: string;
+  readonly id?: number;
+  descripcion: string;
   created_at?: Date;
 }
 
@@ -16,6 +16,7 @@ const TypeProduct = <TypeProductStatic>sequelize.define(
   {
     id: {
       type: Sequelize.INTEGER,
+      autoIncrement: true,
       primaryKey: true
     },
     descripcion: {
