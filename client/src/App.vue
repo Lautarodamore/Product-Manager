@@ -38,10 +38,15 @@
           <template v-slot:activator>
             <v-list-item-title>Productos</v-list-item-title>
           </template>
-          <v-list-item link v-for="(crud, i) in cruds" :key="i">
-            <v-list-item-title v-text="crud[0]"></v-list-item-title>
+          <v-list-item
+            :to="{ path: crud.route }"
+            link
+            v-for="(crud, i) in cruds"
+            :key="i"
+          >
+            <v-list-item-title v-text="crud.title"></v-list-item-title>
             <v-list-item-action>
-              <v-icon>mdi-add</v-icon>
+              <v-icon>{{ crud.icon }}</v-icon>
             </v-list-item-action>
           </v-list-item>
         </v-list-group>
@@ -91,8 +96,12 @@ export default {
       ["Settings", "settings"]
     ],
     cruds: [
-      ["Crear", "mdi-add"],
-      ["Editar/Eliminar", "mdi-hammer-wrench"]
+      { title: "Crear", icon: "mdi-add", route: "/create-product" },
+      {
+        title: "Editar/Eliminar",
+        icon: "mdi-hammer-wrench",
+        route: "/edit-delete-product"
+      }
     ]
   })
 };

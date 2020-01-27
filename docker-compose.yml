@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  frontend:
+    build:
+      context: ./client
+      dockerfile: proxy.Dockerfile
+    ports:
+      - "80:80"
+  backend:
+    build:
+      context: .
+      dockerfile: server.Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on: [database]
+  database:
+    image: postgres:11
+    environment:
+      POSTGRES_USER: lautidamo
+      POSTGRES_PASSWORD: la12papa
+      POSTGRES_DB: product-manager

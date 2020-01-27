@@ -177,13 +177,10 @@ export default {
     },
 
     async deleteItem(item) {
-      console.log(item);
       const index = this.providers.indexOf(item);
       confirm("Estas seguro que quieres elinar este proveedor?") &&
         this.providers.splice(index, 1) &&
-        (await axios.delete(
-          `http://localhost:3000/api/v1/provider/${item.id}`
-        ));
+        (await axios.delete(`http://localhost:3000/api/v1/provider/${item.id}`));
     },
 
     close() {
@@ -204,10 +201,7 @@ export default {
         );
       } else {
         this.providers.push(this.editedItem);
-        await axios.post(
-          "http://localhost:3000/api/v1/provider",
-          this.editedItem
-        );
+        await axios.post("http://localhost:3000/api/v1/provider", this.editedItem);
       }
       this.close();
     }

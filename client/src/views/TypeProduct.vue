@@ -149,7 +149,6 @@ export default {
     },
 
     async deleteItem(item) {
-      console.log(item);
       const index = this.providers.indexOf(item);
       confirm("Estas seguro que quieres elimar este tipo de producto?") &&
         this.providers.splice(index, 1) &&

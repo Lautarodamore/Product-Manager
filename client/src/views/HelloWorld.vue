@@ -126,7 +126,7 @@
           <v-flex mt-4 xs12 md6>
             <v-card data-aos="fade-left" class="mx-auto" max-width="344">
               <v-img
-                src="https://www.dataart.com.ar/media/2819742/news-docker2-big-1600x960.jpg"
+                src="https://www.sesispla.net/content/images/size/w2000/2016/05/docker-facebook-e1464729305785.png"
                 height="200px"
               ></v-img>
 

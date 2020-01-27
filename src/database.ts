@@ -5,8 +5,7 @@ export const sequelize = new Sequelize(
   "lautidamo",
   "la12papa",
   {
-    // gimme postgres, please!
     dialect: "postgres",
-    host: "localhost"
+    host: "database"
   }
 );

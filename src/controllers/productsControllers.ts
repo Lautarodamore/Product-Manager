@@ -2,6 +2,7 @@ import Product from "../models/Products";
 import { Response, Request, NextFunction } from "express";
 import { catchAsync } from "../utils/catchAsync";
 import AppError from "../utils/AppError";
+import { sequelize } from "../database";
 
 export const getProducts = catchAsync(
   async (req: Request, res: Response): Promise<Response> => {
@@ -91,6 +92,18 @@ export const updateProduct = catchAsync(
     return res.status(200).json({
       status: "success",
       data: product
+    });
+  }
+);
+
+export const insertarProductosYProviders = catchAsync(
+  async (req: Request, res: Response): Promise<Response> => {
+    let body = req.body;
+    await sequelize.query(
+      `INSERT INTO product_providers (id_product, id_provider) VALUES (${body.idProduct}, ${body.idProvider});`
+    );
+    return res.status(200).json({
+      status: "success"
     });
   }
 );

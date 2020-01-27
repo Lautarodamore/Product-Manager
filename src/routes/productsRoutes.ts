@@ -4,7 +4,8 @@ import {
   deleteProduct,
   getProduct,
   getProducts,
-  updateProduct
+  updateProduct,
+  insertarProductosYProviders
 } from "./../controllers/productsControllers";
 const router: Router = Router();
 
@@ -18,5 +19,7 @@ router
   .get(getProduct)
   .patch(updateProduct)
   .delete(deleteProduct);
+
+router.route("/providers").post(insertarProductosYProviders);
 
 export default router;
